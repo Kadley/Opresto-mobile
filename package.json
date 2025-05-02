@@ -7,7 +7,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx src/seed.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,9 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@faker-js/faker": "^9.7.0",
+    "@graphql-codegen/cli": "5.0.5",
+    "@graphql-codegen/typescript": "4.1.6",
+    "@graphql-codegen/typescript-resolvers": "4.5.0",
     "@types/node": "^22.15.3",
     "typescript": "^5.8.3"
   }
