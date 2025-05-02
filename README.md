@@ -1,5 +1,43 @@
 # Challenge
 
+## Jour 2
+
+### Étape 0 : Setup
+
+
+
+### Étape 1 : Query
+
+- Récupérer les données de la base de données avec Prisma pour les requêtes suivantes :
+  - Récupérer tous les managers
+  - Récupérer toutes les notes
+  - Récupérer toutes les cuisines
+  - Récupérer toutes les villes
+
+### Étape 2 : Resolvers Restaurant
+
+- Créer les resolvers pour récupérer depuis le restaurant :
+  - Les cuisines
+  - Les notes
+  - Le managers
+
+### Étape 3 : mutation
+
+- Créer une mutation pour ajouter une ville
+- Créer une mutation pour modifier une ville
+
+(input / mutation + génération des types + resolver)
+
+### Étape 4 (Bonus) : Resolvers
+
+- Créer le resolvers pour récupérer depuis la ville les restaurants
+
+### Étape 5 (Bonus) : Mutation
+
+- Créer une mutation pour modifier un restaurant
+- Créer une mutation pour supprimer un restaurant
+- Créer une mutation pour ajouter une note
+
 ## Jour 1
 
 ### Étape 1 : MCD
