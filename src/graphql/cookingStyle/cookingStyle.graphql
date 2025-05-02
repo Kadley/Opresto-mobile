@@ -1,0 +1,9 @@
+type CookingStyle {
+  id: ID!
+  label: String!
+  restaurants: [Restaurant!]!
+}
+
+type Query {
+  cookingStyles: [CookingStyle!]!
+}

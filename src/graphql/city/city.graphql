@@ -1,0 +1,11 @@
+type City {
+  id: ID!
+  name: String!
+  postalCode: String!
+  geopos: String!
+  restaurants: [Restaurant!]!
+}
+
+type Query {
+  cities: [City!]!
+}

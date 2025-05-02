@@ -1,0 +1,17 @@
+type Restaurant {
+  id: ID!
+  name: String!
+  description: String!
+  terrace: Boolean!
+  address: String!
+  cityId: String!
+  managerId: String!
+  city: City!
+  manager: Manager!
+  cookingStyles: [CookingStyle!]!
+  ratings: [Rating!]!
+}
+
+type Query {
+  restaurants: [Restaurant!]!
+}

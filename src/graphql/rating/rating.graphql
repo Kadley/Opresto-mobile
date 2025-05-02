@@ -1,0 +1,10 @@
+type Rating {
+  id: ID!
+  value: Int!
+  restaurantId: ID!
+  restaurant: Restaurant!
+}
+
+type Query {
+  ratings: [Rating!]!
+}
