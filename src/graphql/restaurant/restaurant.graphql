@@ -12,6 +12,22 @@ type Restaurant {
   ratings: [Rating!]!
 }
 
+# Query => récupération de données
 type Query {
   restaurants: [Restaurant!]!
+}
+
+# Un input c'est comme un type mais qui n'est uniquement utilisé que pour les paramètres
+input RestaurantInput {
+  name: String!
+  description: String!
+  terrace: Boolean
+  address: String!
+  cityId: String!
+  managerId: String!
+}
+
+# Mutation => modification de données (ajout, suppression, mise à jour)
+type Mutation {
+  createRestaurant(input: RestaurantInput!): Restaurant!
 }

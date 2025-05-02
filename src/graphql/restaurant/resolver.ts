@@ -27,6 +27,34 @@ const restaurantResolver: Resolvers<Context> = {
       return ctx.dataSources.prisma.restaurant.findMany();
     },
   },
+  Mutation: {
+    async createRestaurant(_parent, args, ctx) {
+      // On va vérifier si la ville et le nom du restaurant ne sont pas déjà pris
+      const existingRestaurant =
+        await ctx.dataSources.prisma.restaurant.findFirst({
+          where: {
+            name: args.input.name,
+            cityId: args.input.cityId,
+          },
+        });
+
+      if (existingRestaurant) {
+        throw new Error(
+          `Restaurant with name ${args.input.name} already exists in city with id ${args.input.cityId}`,
+        );
+      }
+
+      const restaurant = await ctx.dataSources.prisma.restaurant.create({
+        data: {
+          ...args.input,
+          // Si la terrace est null, on ne l'envoie pas à la BDD
+          terrace: args.input.terrace || undefined,
+        },
+      });
+
+      return restaurant;
+    },
+  },
 };
 
 export default restaurantResolver;

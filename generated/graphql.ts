@@ -6,6 +6,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -41,6 +42,16 @@ export type Manager = {
   restaurants: Array<Restaurant>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createRestaurant: Restaurant;
+};
+
+
+export type MutationCreateRestaurantArgs = {
+  input: RestaurantInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   cities: Array<City>;
@@ -71,6 +82,15 @@ export type Restaurant = {
   name: Scalars['String']['output'];
   ratings: Array<Rating>;
   terrace: Scalars['Boolean']['output'];
+};
+
+export type RestaurantInput = {
+  address: Scalars['String']['input'];
+  cityId: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  managerId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  terrace?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -150,9 +170,11 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Partial<Scalars['ID']['output']>>;
   Int: ResolverTypeWrapper<Partial<Scalars['Int']['output']>>;
   Manager: ResolverTypeWrapper<Partial<Manager>>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Rating: ResolverTypeWrapper<Partial<Rating>>;
   Restaurant: ResolverTypeWrapper<Partial<Restaurant>>;
+  RestaurantInput: ResolverTypeWrapper<Partial<RestaurantInput>>;
   String: ResolverTypeWrapper<Partial<Scalars['String']['output']>>;
 };
 
@@ -164,9 +186,11 @@ export type ResolversParentTypes = {
   ID: Partial<Scalars['ID']['output']>;
   Int: Partial<Scalars['Int']['output']>;
   Manager: Partial<Manager>;
+  Mutation: {};
   Query: {};
   Rating: Partial<Rating>;
   Restaurant: Partial<Restaurant>;
+  RestaurantInput: Partial<RestaurantInput>;
   String: Partial<Scalars['String']['output']>;
 };
 
@@ -194,6 +218,10 @@ export type ManagerResolvers<ContextType = any, ParentType extends ResolversPare
   phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   restaurants?: Resolver<Array<ResolversTypes['Restaurant']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createRestaurant?: Resolver<ResolversTypes['Restaurant'], ParentType, ContextType, RequireFields<MutationCreateRestaurantArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -231,6 +259,7 @@ export type Resolvers<ContextType = any> = {
   City?: CityResolvers<ContextType>;
   CookingStyle?: CookingStyleResolvers<ContextType>;
   Manager?: ManagerResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Rating?: RatingResolvers<ContextType>;
   Restaurant?: RestaurantResolvers<ContextType>;
