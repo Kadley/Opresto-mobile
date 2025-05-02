@@ -1,0 +1,37 @@
+{
+  "width": 528,
+  "height": 506,
+  "cx": [
+    [ "VILLE", 272 ],
+    [ "APPARTIENT", 272 ],
+    [ "MANAGER", 58 ],
+    [ "GERE", 163 ],
+    [ "RESTAURANT", 272 ],
+    [ "FAIT", 379 ],
+    [ "CUISINE", 476 ],
+    [ "EVALUE", 272 ],
+    [ "NOTE", 272 ]
+  ],
+  "cy": [
+    [ "VILLE", 60 ],
+    [ "APPARTIENT", 161 ],
+    [ "MANAGER", 270 ],
+    [ "GERE", 270 ],
+    [ "RESTAURANT", 270 ],
+    [ "FAIT", 270 ],
+    [ "CUISINE", 270 ],
+    [ "EVALUE", 379 ],
+    [ "NOTE", 463 ]
+  ],
+  "shift": [
+    [ "APPARTIENT,VILLE,0", 0 ],
+    [ "APPARTIENT,RESTAURANT,0", 0 ],
+    [ "GERE,MANAGER,0", 0 ],
+    [ "GERE,RESTAURANT,0", 0 ],
+    [ "FAIT,RESTAURANT,0", 0 ],
+    [ "FAIT,CUISINE,0", 0 ],
+    [ "EVALUE,NOTE,0", 0 ],
+    [ "EVALUE,RESTAURANT,0", 0 ]
+  ],
+  "ratio": []
+}

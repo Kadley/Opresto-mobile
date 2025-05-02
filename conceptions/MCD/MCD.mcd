@@ -1,0 +1,15 @@
+VILLE: code ville, nom, code postal, coordonnées
+
+APPARTIENT, 0N VILLE, 11 RESTAURANT
+
+MANAGER: code manager, email, téléphone, prénom, nom
+GÈRE, 0N MANAGER, 11 RESTAURANT
+RESTAURANT: code restaurant, name, description, terrace, adresse
+FAIT, 1N RESTAURANT, 0N CUISINE
+CUISINE: code cuisine, label
+
+:
+ÉVALUE, 11 NOTE, 0N RESTAURANT
+
+:
+NOTE: code note, valeur
