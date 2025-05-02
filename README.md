@@ -4,7 +4,9 @@
 
 ### Étape 0 : Setup
 
-
+- `pnpm install` (depuis l'hôte)
+- `docker compose build --no-cache`
+- `docker compose up -d -V` (il va générer le client Prisma + les types des resolvers avant de lancer le serveur)
 
 ### Étape 1 : Query
 

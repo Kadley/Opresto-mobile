@@ -40,3 +40,6 @@ out
 # Ignore application log files generated during local development
 *.log
 logs/
+
+# Ignore generated files
+generated/

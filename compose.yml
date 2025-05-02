@@ -11,7 +11,7 @@ services:
       - .:/app
       - /app/node_modules
     # On va spécifier la commande à exécuter
-    command: pnpm dev
+    command: sh -c "npx prisma generate && pnpm codegen && pnpm dev"
 
   presto_db: 
     image: postgres

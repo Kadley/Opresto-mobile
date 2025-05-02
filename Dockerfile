@@ -3,6 +3,8 @@ FROM node:22-slim
 # Create app directory
 WORKDIR /app
 
+RUN apt-get update -y && apt-get install -y openssl
+
 # Installation de pnpm
 RUN npm install -g pnpm
 
@@ -10,7 +12,7 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 
 # Installation des dépendances
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Copie le reste du code
 COPY . .
