@@ -1,0 +1,32 @@
+services:
+  presto_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+    depends_on:
+      - presto_db
+    volumes:
+      - .:/app
+      - /app/node_modules
+    # On va spécifier la commande à exécuter
+    command: pnpm dev
+
+  presto_db: 
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: prestodb
+      POSTGRES_USER: prestodb
+      POSTGRES_DB: prestodb
+    volumes:
+      # On va partager le volume post_db_data avec le conteneur
+      # Cela va permettre de garder les données même si le conteneur est supprimé
+      - presto_app_db_data:/var/lib/postgresql/data
+    ports:
+      - '5436:5432'
+
+volumes:
+  presto_app_db_data:
