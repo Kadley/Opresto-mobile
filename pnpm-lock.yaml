@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@apollo/datasource-rest':
+        specifier: ^6.4.1
+        version: 6.4.1(graphql@16.11.0)
       '@apollo/server':
         specifier: ^4.12.0
         version: 4.12.0(graphql@16.11.0)
@@ -40,13 +43,13 @@ importers:
         specifier: ^9.7.0
         version: 9.7.0
       '@graphql-codegen/cli':
-        specifier: ^5.0.5
+        specifier: 5.0.5
         version: 5.0.5(@types/node@22.15.3)(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)(typescript@5.8.3)
       '@graphql-codegen/typescript':
-        specifier: ^4.1.6
+        specifier: 4.1.6
         version: 4.1.6(graphql@16.11.0)
       '@graphql-codegen/typescript-resolvers':
-        specifier: ^4.5.0
+        specifier: 4.5.0
         version: 4.5.0(graphql-sock@1.0.1(graphql@16.11.0))(graphql@16.11.0)
       '@types/node':
         specifier: ^22.15.3
@@ -65,6 +68,12 @@ packages:
     resolution: {integrity: sha512-F17/vCp7QVwom9eG7ToauIKdAxpSoadsJnqIfyryLFSkLSOEqu+eC5Z3N8OXcUVStuOMcNHlyraRsA6rRICu4g==}
     peerDependencies:
       graphql: 14.x || 15.x || 16.x
+
+  '@apollo/datasource-rest@6.4.1':
+    resolution: {integrity: sha512-RmZy1vXw8Yh+x6tYV/e6fdtk0iCS083d4C+H9A8Oy1sTC2eoCkuw619YTc74nFzYQ/8yyqI8MvNie2YD/G0wVg==}
+    engines: {node: '>=16.14'}
+    peerDependencies:
+      graphql: ^16.5.0
 
   '@apollo/protobufjs@1.2.7':
     resolution: {integrity: sha512-Lahx5zntHPZia35myYDBRuF58tlwPskwHc5CWBZC/4bMKB6siTBWwtMrkqXcsNwQiFSzSx5hKdRPUmemrEp3Gg==}
@@ -98,6 +107,10 @@ packages:
     resolution: {integrity: sha512-jvvon885hEyWXd4H6zpWeN3tl88QcWnHp5gWF5OPF34uhvoR+DFqcNxs9vrRaBBSY3qda3Qe0bdud7tz2zGx1A==}
     engines: {node: '>=14'}
 
+  '@apollo/utils.fetcher@3.1.0':
+    resolution: {integrity: sha512-Z3QAyrsQkvrdTuHAFwWDNd+0l50guwoQUoaDQssLOjkmnmVuvXlJykqlEJolio+4rFwBnWdoY1ByFdKaQEcm7A==}
+    engines: {node: '>=16'}
+
   '@apollo/utils.isnodelike@2.0.1':
     resolution: {integrity: sha512-w41XyepR+jBEuVpoRM715N2ZD0xMD413UiJx8w5xnAZD2ZkSJnMJBoIzauK83kJpSgNuR6ywbV29jG9NmxjK0Q==}
     engines: {node: '>=14'}
@@ -106,9 +119,17 @@ packages:
     resolution: {integrity: sha512-qVo5PvUUMD8oB9oYvq4ViCjYAMWnZ5zZwEjNF37L2m1u528x5mueMlU+Cr1UinupCgdB78g+egA1G98rbJ03Vw==}
     engines: {node: '>=14'}
 
+  '@apollo/utils.keyvaluecache@3.1.0':
+    resolution: {integrity: sha512-MM/DKIqpQQbuNG1gNPAlGc45THdWkroTmN8o/J09merFwf/LlZ7+lAfcHFDXIYIknwKmUjJrOMS3OxYbjrz2hA==}
+    engines: {node: '>=16.14'}
+
   '@apollo/utils.logger@2.0.1':
     resolution: {integrity: sha512-YuplwLHaHf1oviidB7MxnCXAdHp3IqYV8n0momZ3JfLniae92eYqMIx+j5qJFX6WKJPs6q7bczmV4lXIsTu5Pg==}
     engines: {node: '>=14'}
+
+  '@apollo/utils.logger@3.0.0':
+    resolution: {integrity: sha512-M8V8JOTH0F2qEi+ktPfw4RL7MvUycDfKp7aEap2eWXfL5SqWHN6jTLbj5f5fj1cceHpyaUSOZlvlaaryaxZAmg==}
+    engines: {node: '>=16'}
 
   '@apollo/utils.printwithreducedwhitespace@2.0.1':
     resolution: {integrity: sha512-9M4LUXV/fQBh8vZWlLvb/HyyhjJ77/I5ZKu+NBWV/BmYGyRmoEP9EVAy7LCVoY3t8BDcyCAGfxJaLFCSuQkPUg==}
@@ -143,6 +164,10 @@ packages:
   '@apollo/utils.withrequired@2.0.1':
     resolution: {integrity: sha512-YBDiuAX9i1lLc6GeTy1m7DGLFn/gMnvXqlalOIMjM7DeOgIacEjjfwPqb0M1CQ2v11HhR15d1NmxJoRCfrNqcA==}
     engines: {node: '>=14'}
+
+  '@apollo/utils.withrequired@3.0.0':
+    resolution: {integrity: sha512-aaxeavfJ+RHboh7c2ofO5HHtQobGX4AgUujXP4CXpREHp9fQ9jPi6K9T1jrAKe7HIipoP0OJ1gd6JamSkFIpvA==}
+    engines: {node: '>=16'}
 
   '@ardatan/relay-compiler@12.0.3':
     resolution: {integrity: sha512-mBDFOGvAoVlWaWqs3hm1AciGHSQE1rqFc/liZTyYz/Oek9yZdT5H26pH2zAFuEiTiBVPPyMuqf5VjOFPI2DGsQ==}
@@ -811,6 +836,9 @@ packages:
   '@types/express@4.17.21':
     resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
 
+  '@types/http-cache-semantics@4.0.4':
+    resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
+
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
 
@@ -1362,6 +1390,9 @@ packages:
   header-case@2.0.4:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
 
+  http-cache-semantics@4.1.1:
+    resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
+
   http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
@@ -1516,6 +1547,12 @@ packages:
       enquirer:
         optional: true
 
+  lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+
+  lodash.isplainobject@4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
 
@@ -1546,6 +1583,9 @@ packages:
 
   lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
+
+  lru-cache@10.4.3:
+    resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
@@ -2130,6 +2170,21 @@ snapshots:
     dependencies:
       graphql: 16.11.0
 
+  '@apollo/datasource-rest@6.4.1(graphql@16.11.0)':
+    dependencies:
+      '@apollo/utils.fetcher': 3.1.0
+      '@apollo/utils.keyvaluecache': 3.1.0
+      '@apollo/utils.logger': 3.0.0
+      '@apollo/utils.withrequired': 3.0.0
+      '@types/http-cache-semantics': 4.0.4
+      graphql: 16.11.0
+      http-cache-semantics: 4.1.1
+      lodash.clonedeep: 4.5.0
+      lodash.isplainobject: 4.0.6
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   '@apollo/protobufjs@1.2.7':
     dependencies:
       '@protobufjs/aspromise': 1.1.2
@@ -2199,6 +2254,8 @@ snapshots:
 
   '@apollo/utils.fetcher@2.0.1': {}
 
+  '@apollo/utils.fetcher@3.1.0': {}
+
   '@apollo/utils.isnodelike@2.0.1': {}
 
   '@apollo/utils.keyvaluecache@2.1.1':
@@ -2206,7 +2263,14 @@ snapshots:
       '@apollo/utils.logger': 2.0.1
       lru-cache: 7.18.3
 
+  '@apollo/utils.keyvaluecache@3.1.0':
+    dependencies:
+      '@apollo/utils.logger': 3.0.0
+      lru-cache: 10.4.3
+
   '@apollo/utils.logger@2.0.1': {}
+
+  '@apollo/utils.logger@3.0.0': {}
 
   '@apollo/utils.printwithreducedwhitespace@2.0.1(graphql@16.11.0)':
     dependencies:
@@ -2236,6 +2300,8 @@ snapshots:
       graphql: 16.11.0
 
   '@apollo/utils.withrequired@2.0.1': {}
+
+  '@apollo/utils.withrequired@3.0.0': {}
 
   '@ardatan/relay-compiler@12.0.3(graphql@16.11.0)':
     dependencies:
@@ -3081,6 +3147,8 @@ snapshots:
       '@types/qs': 6.9.18
       '@types/serve-static': 1.15.7
 
+  '@types/http-cache-semantics@4.0.4': {}
+
   '@types/http-errors@2.0.4': {}
 
   '@types/js-yaml@4.0.9': {}
@@ -3713,6 +3781,8 @@ snapshots:
       capital-case: 1.0.4
       tslib: 2.8.1
 
+  http-cache-semantics@4.1.1: {}
+
   http-errors@2.0.0:
     dependencies:
       depd: 2.0.0
@@ -3859,6 +3929,10 @@ snapshots:
       through: 2.3.8
       wrap-ansi: 7.0.0
 
+  lodash.clonedeep@4.5.0: {}
+
+  lodash.isplainobject@4.0.6: {}
+
   lodash.sortby@4.7.0: {}
 
   lodash@4.17.21: {}
@@ -3890,6 +3964,8 @@ snapshots:
   lower-case@2.0.2:
     dependencies:
       tslib: 2.8.1
+
+  lru-cache@10.4.3: {}
 
   lru-cache@5.1.1:
     dependencies:

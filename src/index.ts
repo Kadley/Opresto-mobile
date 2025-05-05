@@ -6,6 +6,7 @@ import * as R from 'remeda';
 import path from 'node:path';
 import { prisma } from './utils/prisma';
 import { createContext } from './graphql/context';
+import { WeatherAPI } from './graphql/dataSources/api/weather';
 
 const typesArray = loadFilesSync(
   path.join(import.meta.dirname, './graphql/**/*.graphql'),
@@ -33,3 +34,7 @@ const { url } = await startStandaloneServer(server, {
 });
 
 console.log(`🚀  Server ready at: ${url}`);
+
+// const weatherAPI = new WeatherAPI();
+// Exemple d'utilisation de la dataSource WeatherAPI
+// const data = await weatherAPI.getWeather('50.366669', '3.06667');

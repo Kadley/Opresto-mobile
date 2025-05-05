@@ -4,6 +4,7 @@ type City {
   postalCode: String!
   geopos: String!
   restaurants: [Restaurant!]!
+  weather: Weather
 }
 
 type Query {

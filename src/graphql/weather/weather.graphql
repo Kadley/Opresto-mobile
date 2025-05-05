@@ -1,0 +1,12 @@
+type Weather {
+  latitude: Float!
+  longitude: Float!
+  currentTemperature: Float!
+  time: String!
+  weatherCode: Int!
+  weatherCodeDescription: String!
+  temperatureMax: Float!
+  temperatureMin: Float!
+  sunrise: String!
+  sunset: String!
+}

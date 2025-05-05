@@ -1,5 +1,6 @@
 import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone';
 import { prisma } from '../utils/prisma';
+import { WeatherAPI } from './dataSources/api/weather';
 
 export async function createContext({
   req,
@@ -8,6 +9,7 @@ export async function createContext({
   return {
     dataSources: {
       prisma,
+      weatherAPI: new WeatherAPI(),
     },
   };
 }
