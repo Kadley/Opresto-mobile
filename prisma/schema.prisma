@@ -64,7 +64,7 @@ model Restaurant {
 
   city          City           @relation(fields: [cityId], references: [id])
   manager       Manager        @relation(fields: [managerId], references: [id])
-  rating        Rating[]
+  ratings       Rating[]
   cookingStyles CookingStyle[] @relation(name: "RestaurantCookingStyle")
 
   @@unique([name, cityId])

@@ -17,6 +17,54 @@ const restaurantResolver: Resolvers<Context> = {
 
       return city;
     },
+    async manager(parent, _args, ctx) {
+      const manager = await ctx.dataSources.prisma.manager.findUnique({
+        where: {
+          id: parent.managerId,
+        },
+      });
+
+      if (!manager) {
+        throw new Error(`Manager with id ${parent.managerId} not found`);
+      }
+
+      return manager;
+    },
+    async cookingStyles(parent, _args, ctx) {
+      // Ici, on fait autant de requêtes que de restaurants
+      // const cookingStyles = await ctx.dataSources.prisma.cookingStyle.findMany({
+      //   where: {
+      //     restaurants: {
+      //       some: {
+      //         id: parent.id,
+      //       },
+      //     },
+      //   },
+      // });
+
+      // De cette manière, prisma va être capable de regrouper toutes les requêtes pour les restaurants
+      // Et récupérer les cooking styles en une seule requête
+      const cookingStyles = await ctx.dataSources.prisma.restaurant
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .cookingStyles();
+
+      return cookingStyles || [];
+    },
+    async ratings(parent, _args, ctx) {
+      const ratings = await ctx.dataSources.prisma.restaurant
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .ratings();
+
+      return ratings || [];
+    },
   },
   Query: {
     // Dans chaque resolvers, on va avoir accès à 3 arguments :
