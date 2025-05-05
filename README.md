@@ -1,5 +1,46 @@
 # Challenge
 
+## Jour 3
+
+Les bonus seront également à faire demain après midi pour continuer la pratique. Pas de pression, on avance à son rythme.
+
+### Étape 1 : Resolver Météo d'une ville
+
+- Implémenter le resolver pour récupérer la météo d'une ville ([resolver](./src/graphql/city/resolver.ts))
+
+### Étape 2 : Resolver pour récupérer une donnée
+
+- Créer un resolver pour récupérer une ville par rapport à son id
+- Créer un resolver pour récupérer une ville par rapport à son code postal
+- Créer un resolver pour récupérer un restaurant par rapport à son id
+
+### Étape 3 (Bonus) : Finir les resolvers non implémentés
+
+- les bonus 4 et 5 du jour 2
+- Sur la ville :
+  - Récupérer les restaurants
+- Sur le manager :
+  - Récupérer les restaurants
+- Sur les notes :
+  - Récupérer le restaurant
+- Sur les styles de cuisine :
+  - Récupérer les restaurants
+
+### Étape 4 (Bonus) : Finir les mutations non implémentées
+
+- Sur la ville :
+  - Créer une mutation pour supprimer une ville
+- Sur le restaurant :
+  - Créer une mutation pour modifier un restaurant
+  - Créer une mutation pour supprimer un restaurant
+- Sur les types de cuisine :
+  - Créer une mutation pour ajouter un type de cuisine
+  - Créer une mutation pour supprimer un type de cuisine
+- Sur les notes :
+  - Créer une mutation pour ajouter une note
+  - Créer une mutation pour modifier une note
+  - Créer une mutation pour supprimer une note
+
 ## Jour 2
 
 ### Étape 0 : Setup
