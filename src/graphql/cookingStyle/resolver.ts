@@ -3,8 +3,8 @@ import type { Context } from '../context';
 
 const cookingStyleResolver: Resolvers<Context> = {
   Query: {
-    cookingStyles() {
-      return [];
+    cookingStyles(_parent, _args, ctx) {
+      return ctx.dataSources.prisma.cookingStyle.findMany();
     },
   },
 };
