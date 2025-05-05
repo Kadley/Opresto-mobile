@@ -9,3 +9,14 @@ type City {
 type Query {
   cities: [City!]!
 }
+
+input CityInput {
+  name: String!
+  postalCode: String!
+  geopos: String!
+}
+
+type Mutation {
+  createCity(input: CityInput!): City!
+  updateCity(id: ID!, input: CityInput!): City!
+}
