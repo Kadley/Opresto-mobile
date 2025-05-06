@@ -1,6 +1,13 @@
 import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone';
 import { prisma } from '../utils/prisma';
 import { WeatherAPI } from './dataSources/api/weather';
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
+
+// Un cache qui se clear toutes les heures
+const cache = new InMemoryLRUCache({
+  ttl: 60 * 60, // 1 hour
+  max: 500,
+});
 
 export async function createContext({
   req,
@@ -9,7 +16,7 @@ export async function createContext({
   return {
     dataSources: {
       prisma,
-      weatherAPI: new WeatherAPI(),
+      weatherAPI: new WeatherAPI({ cache }),
     },
   };
 }
