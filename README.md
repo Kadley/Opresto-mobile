@@ -1,5 +1,15 @@
 # Challenge
 
+## Jour 4
+
+### Étape 1 : Resolver / mutation
+
+- Continuer les bonus du jour 3 pour finir les resolvers et les mutations.
+
+### Étape 2 : Bonus
+
+- Ajouter une pagination sur les Query & les resolvers
+
 ## Jour 3
 
 Les bonus seront également à faire demain après midi pour continuer la pratique. Pas de pression, on avance à son rythme.
