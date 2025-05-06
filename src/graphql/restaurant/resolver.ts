@@ -74,6 +74,20 @@ const restaurantResolver: Resolvers<Context> = {
     restaurants(_parent, _args, ctx) {
       return ctx.dataSources.prisma.restaurant.findMany();
     },
+
+    async restaurant(_parent, args, ctx) {
+      const restaurant = await ctx.dataSources.prisma.restaurant.findUnique({
+        where: {
+          id: args.id,
+        },
+      });
+
+      if (!restaurant) {
+        throw new Error('Restaurant not found');
+      }
+
+      return restaurant;
+    },
   },
   Mutation: {
     async createRestaurant(_parent, args, ctx) {

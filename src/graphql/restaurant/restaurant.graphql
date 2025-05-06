@@ -15,6 +15,7 @@ type Restaurant {
 # Query => récupération de données
 type Query {
   restaurants: [Restaurant!]!
+  restaurant(id: ID!): Restaurant!
 }
 
 # Un input c'est comme un type mais qui n'est uniquement utilisé que pour les paramètres

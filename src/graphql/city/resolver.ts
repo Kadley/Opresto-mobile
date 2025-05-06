@@ -38,6 +38,32 @@ const cityResolver: Resolvers<Context> = {
         skip: pagination?.offset || 0,
       });
     },
+    async city(_parent, args, ctx) {
+      const city = await ctx.dataSources.prisma.city.findUnique({
+        where: {
+          id: args.id,
+        },
+      });
+
+      if (!city) {
+        throw new Error('City not found');
+      }
+
+      return city;
+    },
+    async cityByPostalCode(_parent, args, ctx) {
+      const city = await ctx.dataSources.prisma.city.findFirst({
+        where: {
+          postalCode: args.postalCode,
+        },
+      });
+
+      if (!city) {
+        throw new Error('City not found');
+      }
+
+      return city;
+    },
   },
   Mutation: {
     async createCity(_parent, args, ctx) {

@@ -14,6 +14,8 @@ type City {
 
 type Query {
   cities(pagination: Pagination): [City!]!
+  city(id: ID!): City!
+  cityByPostalCode(postalCode: String!): City!
 }
 
 input CityInput {
