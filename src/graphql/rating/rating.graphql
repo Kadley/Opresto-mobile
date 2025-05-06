@@ -6,5 +6,17 @@ type Rating {
 }
 
 type Query {
-  ratings: [Rating!]!
+  ratings(pagination: Pagination): [Rating!]!
+  rating(id: ID!): Rating!
+}
+
+input RatingInput {
+  value: Int!
+  restaurantId: ID!
+}
+
+type Mutation {
+  createRating(input: RatingInput!): Rating!
+  updateRating(id: ID!, input: RatingInput!): Rating!
+  deleteRating(id: ID!): Rating!
 }

@@ -1,9 +1,20 @@
 type CookingStyle {
   id: ID!
   label: String!
-  restaurants: [Restaurant!]!
+  restaurants(pagination: Pagination): [Restaurant!]!
 }
 
 type Query {
-  cookingStyles: [CookingStyle!]!
+  cookingStyles(pagination: Pagination): [CookingStyle!]!
+  cookingStyle(id: ID!): CookingStyle!
+}
+
+input CookingStyleInput {
+  label: String!
+}
+
+type Mutation {
+  createCookingStyle(input: CookingStyleInput!): CookingStyle!
+  updateCookingStyle(id: ID!, input: CookingStyleInput!): CookingStyle!
+  deleteCookingStyle(id: ID!): CookingStyle!
 }

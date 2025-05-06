@@ -1,6 +1,6 @@
-import { skip } from 'node:test';
 import type { Resolvers } from '../../../generated/graphql';
 import type { Context } from '../context';
+import { getPaginationInfo } from '../common/utils';
 
 const restaurantResolver: Resolvers<Context> = {
   Restaurant: {
@@ -30,7 +30,7 @@ const restaurantResolver: Resolvers<Context> = {
 
       return manager;
     },
-    async cookingStyles(parent, _args, ctx) {
+    async cookingStyles(parent, args, ctx) {
       // Ici, on fait autant de requêtes que de restaurants
       // const cookingStyles = await ctx.dataSources.prisma.cookingStyle.findMany({
       //   where: {
@@ -50,18 +50,18 @@ const restaurantResolver: Resolvers<Context> = {
             id: parent.id,
           },
         })
-        .cookingStyles();
+        .cookingStyles(getPaginationInfo(args.pagination));
 
       return cookingStyles || [];
     },
-    async ratings(parent, _args, ctx) {
+    async ratings(parent, args, ctx) {
       const ratings = await ctx.dataSources.prisma.restaurant
         .findUnique({
           where: {
             id: parent.id,
           },
         })
-        .ratings();
+        .ratings(getPaginationInfo(args.pagination));
 
       return ratings || [];
     },
@@ -71,8 +71,10 @@ const restaurantResolver: Resolvers<Context> = {
     // _parent : le parent du resolver (on ne l'utilise pas ici car c'est un Query)
     // _args : les arguments (les paramètres) de la requête (on ne l'utilise pas ici car on ne prend pas d'arguments)
     // ctx : le context (on y a accès grâce à la fonction createContext)
-    restaurants(_parent, _args, ctx) {
-      return ctx.dataSources.prisma.restaurant.findMany();
+    restaurants(_parent, args, ctx) {
+      return ctx.dataSources.prisma.restaurant.findMany(
+        getPaginationInfo(args.pagination),
+      );
     },
 
     async restaurant(_parent, args, ctx) {
@@ -114,6 +116,50 @@ const restaurantResolver: Resolvers<Context> = {
         },
       });
 
+      return restaurant;
+    },
+
+    async updateRestaurant(_parent, args, ctx) {
+      // On va vérifier si la ville et le nom du restaurant ne sont pas déjà pris
+      const existingRestaurant =
+        await ctx.dataSources.prisma.restaurant.findFirst({
+          where: {
+            name: args.input.name,
+            cityId: args.input.cityId,
+            id: {
+              not: args.id,
+            },
+          },
+        });
+
+      if (existingRestaurant) {
+        throw new Error(
+          `Restaurant with name ${args.input.name} already exists in city with id ${args.input.cityId}`,
+        );
+      }
+
+      const restaurant = await ctx.dataSources.prisma.restaurant.update({
+        where: {
+          id: args.id,
+        },
+        data: {
+          ...args.input,
+          // Si la terrace est null, on ne l'envoie pas à la BDD
+          terrace: args.input.terrace || undefined,
+        },
+      });
+
+      return restaurant;
+    },
+    async deleteRestaurant(_parent, args, ctx) {
+      const restaurant = await ctx.dataSources.prisma.restaurant.delete({
+        where: {
+          id: args.id,
+        },
+      });
+      if (!restaurant) {
+        throw new Error('Restaurant not found');
+      }
       return restaurant;
     },
   },

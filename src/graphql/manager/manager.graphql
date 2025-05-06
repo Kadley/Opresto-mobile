@@ -4,9 +4,31 @@ type Manager {
   lastname: String!
   email: String!
   phone: String!
-  restaurants: [Restaurant!]!
+  restaurants(pagination: Pagination): [Restaurant!]!
 }
 
 type Query {
-  managers: [Manager!]!
+  managers(pagination: Pagination): [Manager!]!
+  manager(id: ID!): Manager!
+}
+
+input CreateManagerInput {
+  firstname: String!
+  lastname: String!
+  email: String!
+  phone: String!
+  password: String!
+}
+
+input UpdateManagerInput {
+  firstname: String!
+  lastname: String!
+  email: String!
+  phone: String!
+}
+
+type Mutation {
+  createManager(input: CreateManagerInput!): Manager!
+  updateManager(id: ID!, input: UpdateManagerInput!): Manager!
+  deleteManager(id: ID!): Manager!
 }

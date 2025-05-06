@@ -1,4 +1,5 @@
 import type { Resolvers } from '../../../generated/graphql';
+import { getPaginationInfo } from '../common/utils';
 import type { Context } from '../context';
 
 const cityResolver: Resolvers<Context> = {
@@ -15,28 +16,22 @@ const cityResolver: Resolvers<Context> = {
     },
 
     async restaurants(parent, args, ctx) {
-      const pagination = args.pagination;
       const restaurants = await ctx.dataSources.prisma.city
         .findUnique({
           where: {
             id: parent.id,
           },
         })
-        .restaurants({
-          take: pagination?.limit || 10,
-          skip: pagination?.offset || 0,
-        });
+        .restaurants(getPaginationInfo(args.pagination));
 
       return restaurants || [];
     },
   },
   Query: {
     cities(_parent, args, ctx) {
-      const pagination = args.pagination;
-      return ctx.dataSources.prisma.city.findMany({
-        take: pagination?.limit || 10,
-        skip: pagination?.offset || 0,
-      });
+      return ctx.dataSources.prisma.city.findMany(
+        getPaginationInfo(args.pagination),
+      );
     },
     async city(_parent, args, ctx) {
       const city = await ctx.dataSources.prisma.city.findUnique({
@@ -79,6 +74,15 @@ const cityResolver: Resolvers<Context> = {
           id: args.id,
         },
         data: args.input,
+      });
+
+      return city;
+    },
+    async deleteCity(_parent, args, ctx) {
+      const city = await ctx.dataSources.prisma.city.delete({
+        where: {
+          id: args.id,
+        },
       });
 
       return city;

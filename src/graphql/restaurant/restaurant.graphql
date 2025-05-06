@@ -8,13 +8,13 @@ type Restaurant {
   managerId: String!
   city: City!
   manager: Manager!
-  cookingStyles: [CookingStyle!]!
-  ratings: [Rating!]!
+  cookingStyles(pagination: Pagination): [CookingStyle!]!
+  ratings(pagination: Pagination): [Rating!]!
 }
 
 # Query => récupération de données
 type Query {
-  restaurants: [Restaurant!]!
+  restaurants(pagination: Pagination): [Restaurant!]!
   restaurant(id: ID!): Restaurant!
 }
 
@@ -31,4 +31,6 @@ input RestaurantInput {
 # Mutation => modification de données (ajout, suppression, mise à jour)
 type Mutation {
   createRestaurant(input: RestaurantInput!): Restaurant!
+  updateRestaurant(id: ID!, input: RestaurantInput!): Restaurant!
+  deleteRestaurant(id: ID!): Restaurant!
 }
