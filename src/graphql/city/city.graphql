@@ -1,14 +1,19 @@
+input Pagination {
+  limit: Int
+  offset: Int
+}
+
 type City {
   id: ID!
   name: String!
   postalCode: String!
   geopos: String!
-  restaurants: [Restaurant!]!
+  restaurants(pagination: Pagination): [Restaurant!]!
   weather: Weather
 }
 
 type Query {
-  cities: [City!]!
+  cities(pagination: Pagination): [City!]!
 }
 
 input CityInput {

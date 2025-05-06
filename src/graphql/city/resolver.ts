@@ -3,14 +3,40 @@ import type { Context } from '../context';
 
 const cityResolver: Resolvers<Context> = {
   City: {
-    weather(parent, _args, ctx) {
+    async weather(parent, _args, ctx) {
       // Utiliser notre dataSource pour récupérer la météo depuis la latitude et la longitude de notre ville
-      return null;
+      const [latitude, longitude] = parent.geopos?.split(',') || [];
+
+      if (!latitude || !longitude) {
+        return null;
+      }
+
+      return ctx.dataSources.weatherAPI.getWeather(latitude, longitude);
+    },
+
+    async restaurants(parent, args, ctx) {
+      const pagination = args.pagination;
+      const restaurants = await ctx.dataSources.prisma.city
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .restaurants({
+          take: pagination?.limit || 10,
+          skip: pagination?.offset || 0,
+        });
+
+      return restaurants || [];
     },
   },
   Query: {
-    cities(_parent, _args, ctx) {
-      return ctx.dataSources.prisma.city.findMany();
+    cities(_parent, args, ctx) {
+      const pagination = args.pagination;
+      return ctx.dataSources.prisma.city.findMany({
+        take: pagination?.limit || 10,
+        skip: pagination?.offset || 0,
+      });
     },
   },
   Mutation: {
