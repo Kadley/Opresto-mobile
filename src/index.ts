@@ -27,7 +27,7 @@ const server = new ApolloServer({
 });
 
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: 4000, host: '0.0.0.0' },
   // Le context va permettre de passer des données à tous les resolvers
   // On y passe généralement la connexion à la BDD, le user connecté, les sources de données que l'on peut avoir.
   context: createContext,

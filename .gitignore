@@ -1,3 +1,48 @@
+# --- Node.js / pnpm ---
 node_modules/
 .pnpm-store/
+pnpm-debug.log*
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Build Artifacts ---
+dist/
+build/
+out/
 generated/
+
+# --- Environment Variables ---
+.env
+
+# --- IDE/Editor Specific ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.komodotools
+*~
+*.swp
+
+# --- OS-Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Version Control ---
+.git/
+.gitignore
+.gitattributes
+
+# --- Docker ---
+.dockerignore
+Dockerfile*
+docker-compose*
+compose*
+
+# --- Expo (React Native) ---
+opresto-mobile/.expo/
+opresto-mobile/.expo-shared/
+
+# --- Miscellaneous ---
+biome.json
