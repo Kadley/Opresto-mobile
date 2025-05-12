@@ -1,5 +1,14 @@
 # Challenge
 
+## Intialisation des données
+
+Une fois que le docker est lancé.
+
+- exécuter les fichiers de migrations pour initialiser la base de données
+  - `docker compose exec presto_app npx prisma db push`
+- exécuter le fichier de seed pour insérer des données dans la base de données
+  - `docker compose exec presto_app pnpm seed`
+
 ## Jour 4
 
 ### Étape 1 : Resolver / mutation
