@@ -1,5 +1,12 @@
 import React from 'react';
-import { Text, Button, Linking, ScrollView, View } from 'react-native';
+import {
+  Text,
+  Button,
+  Linking,
+  ScrollView,
+  View,
+  StyleSheet,
+} from 'react-native';
 import { gql, useQuery } from '@apollo/client';
 import { useLocalSearchParams } from 'expo-router';
 
@@ -34,47 +41,51 @@ const GET_CITY_DETAILS = gql`
 `;
 
 export default function CityId() {
-  const { id } = useLocalSearchParams(); // Récupère le paramètre 'id'
-
-  console.log('ID récupéré:', id); // Vérifie si l'ID est bien récupéré
-
+  const { id } = useLocalSearchParams();
   const { data, loading, error } = useQuery(GET_CITY_DETAILS, {
-    variables: { id }, // Passe 'id' à la requête GraphQL
+    variables: { id },
+    skip: !id || typeof id !== 'string',
   });
 
-  if (loading) return <Text>Chargement...</Text>;
-  if (error) return <Text>Erreur : {error.message}</Text>;
+  if (loading) return <Text style={styles.loading}>Chargement...</Text>;
+  if (error) return <Text style={styles.error}>Erreur : {error.message}</Text>;
 
   const city = data.city;
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 16 }}>
-      <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>
         {city.name} ({city.postalCode})
       </Text>
 
-      <Text style={{ fontSize: 18, marginTop: 10 }}>
-        🌡️ Météo : {city.weather.currentTemperature}°C
-      </Text>
-      <Text style={{ fontSize: 18 }}>
-        Max : {city.weather.temperatureMax}°C | Min :{' '}
-        {city.weather.temperatureMin}°C
-      </Text>
-      <Text style={{ fontSize: 18, marginTop: 10 }}>
-        🌤️ {city.weather.weatherCodeDescription}
-      </Text>
-
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 20 }}>
-        🍽️ Restaurants :
-      </Text>
-      {city.restaurants.map((r: Restaurant, index: number) => (
-        <Text key={r.name} style={{ marginLeft: 8 }}>
-          • {r.name} ({r.description},{' '}
-          {r.terrace ? 'Terrace disponible' : 'Pas de terrasse'}) - {r.address}
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>🌤️ Météo actuelle</Text>
+        <Text style={styles.text}>
+          Température : {city.weather.currentTemperature}°C
         </Text>
-      ))}
+        <Text style={styles.text}>Max : {city.weather.temperatureMax}°C</Text>
+        <Text style={styles.text}>Min : {city.weather.temperatureMin}°C</Text>
+        <Text style={styles.text}>
+          Conditions : {city.weather.weatherCodeDescription}
+        </Text>
+      </View>
 
-      <View style={{ marginTop: 20 }}>
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>🍽️ Restaurants disponibles</Text>
+        {city.restaurants.map((r: Restaurant, index: number) => (
+          <View key={r.name} style={styles.restaurantItem}>
+            <Text style={styles.restaurantName}>{r.name}</Text>
+            <Text style={styles.text}>{r.description}</Text>
+            <Text style={styles.text}>
+              {r.terrace ? '✅ Terrasse disponible' : '❌ Pas de terrasse'}
+            </Text>
+            <Text style={styles.text}>📍 {r.address}</Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>🗺️ Carte</Text>
         <Button
           title="Voir sur Google Maps"
           onPress={() =>
@@ -85,3 +96,60 @@ export default function CityId() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    backgroundColor: '#f2f2f2',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#222',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#444',
+  },
+  card: {
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  text: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 4,
+  },
+  restaurantItem: {
+    marginBottom: 12,
+    paddingBottom: 8,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ccc',
+  },
+  restaurantName: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  loading: {
+    textAlign: 'center',
+    marginTop: 50,
+    fontSize: 18,
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 50,
+    fontSize: 18,
+  },
+});
