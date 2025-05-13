@@ -1,14 +1,14 @@
 import React from 'react';
 import {
   Text,
-  Button,
   Linking,
   ScrollView,
   View,
   StyleSheet,
+  Pressable,
 } from 'react-native';
 import { gql, useQuery } from '@apollo/client';
-import { useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 
 type Restaurant = {
   name: string;
@@ -53,47 +53,59 @@ export default function CityId() {
   const city = data.city;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>
-        {city.name} ({city.postalCode})
-      </Text>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>🌤️ Météo actuelle</Text>
-        <Text style={styles.text}>
-          Température : {city.weather.currentTemperature}°C
+    <>
+      <Stack.Screen
+        name="cityId"
+        options={{
+          title: '🏠 Les Villes',
+          headerStyle: { backgroundColor: '#f4f4f4' },
+        }}
+      />
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>
+          {city.name} ({city.postalCode})
         </Text>
-        <Text style={styles.text}>Max : {city.weather.temperatureMax}°C</Text>
-        <Text style={styles.text}>Min : {city.weather.temperatureMin}°C</Text>
-        <Text style={styles.text}>
-          Conditions : {city.weather.weatherCodeDescription}
-        </Text>
-      </View>
 
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>🍽️ Restaurants disponibles</Text>
-        {city.restaurants.map((r: Restaurant, index: number) => (
-          <View key={r.name} style={styles.restaurantItem}>
-            <Text style={styles.restaurantName}>{r.name}</Text>
-            <Text style={styles.text}>{r.description}</Text>
-            <Text style={styles.text}>
-              {r.terrace ? '✅ Terrasse disponible' : '❌ Pas de terrasse'}
-            </Text>
-            <Text style={styles.text}>📍 {r.address}</Text>
-          </View>
-        ))}
-      </View>
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>🌤️ Météo actuelle</Text>
+          <Text style={styles.text}>
+            Température : {city.weather.currentTemperature}°C
+          </Text>
+          <Text style={styles.text}>Max : {city.weather.temperatureMax}°C</Text>
+          <Text style={styles.text}>Min : {city.weather.temperatureMin}°C</Text>
+          <Text style={styles.text}>
+            Conditions : {city.weather.weatherCodeDescription}
+          </Text>
+        </View>
 
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>🗺️ Carte</Text>
-        <Button
-          title="Voir sur Google Maps"
-          onPress={() =>
-            Linking.openURL(`https://www.google.com/maps/place/${city.geopos}`)
-          }
-        />
-      </View>
-    </ScrollView>
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>🍽️ Restaurants disponibles</Text>
+          {city.restaurants.map((r: Restaurant, index: number) => (
+            <View key={r.name} style={styles.restaurantItem}>
+              <Text style={styles.restaurantName}>{r.name}</Text>
+              <Text style={styles.text}>{r.description}</Text>
+              <Text style={styles.text}>
+                {r.terrace ? '✅ Terrasse disponible' : '❌ Pas de terrasse'}
+              </Text>
+              <Text style={styles.text}>📍 {r.address}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>🗺️ Carte</Text>
+          <Pressable
+            onPress={() =>
+              Linking.openURL(
+                `https://www.google.com/maps/search/?api=1&query=${city.geopos}`,
+              )
+            }
+          >
+            <Text>📍 Voir sur la carte</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </>
   );
 }
 

@@ -26,7 +26,7 @@ services:
       # Cela va permettre de garder les données même si le conteneur est supprimé
       - presto_app_db_data:/var/lib/postgresql/data
     ports:
-      - '55436:5432'
+      - '55437:5432'
 
 volumes:
   presto_app_db_data:

@@ -10,14 +10,20 @@ export default function Home() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Accueil' }} />
-
+      <Stack.Screen
+        name="index"
+        options={{
+          title: '🏠 Accueil',
+          headerStyle: { backgroundColor: '#f4f4f4' },
+        }}
+      />
       {loading && <Text style={styles.loading}>Chargement...</Text>}
       {error && <Text style={styles.error}>Erreur : {error.message}</Text>}
 
       {!loading && !error && (
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.header}>🏙️ Villes disponibles</Text>
+          {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
           {data.cities.map((city: any) => (
             <Pressable
               key={city.id}
@@ -34,6 +40,7 @@ export default function Home() {
           ))}
 
           <Text style={styles.header}>🍴 Restaurants à découvrir</Text>
+          {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
           {data.restaurants.map((r: any) => (
             <Pressable
               key={r.id}

@@ -9,7 +9,7 @@ import { Platform } from 'react-native';
 const uri =
   Platform.OS === 'web'
     ? 'http://localhost:4000/graphql' // Utiliser localhost pour le web
-    : 'http://192.168.93.131:4000/graphql'; // Remplacer localhost par l'IP de ton PC pour Expo Go
+    : 'http://192.168.89.112:4000/graphql'; // Remplacer localhost par l'IP de ton PC pour Expo Go
 
 const client = new ApolloClient({
   uri,

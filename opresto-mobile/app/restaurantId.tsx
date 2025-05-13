@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useQuery } from '@apollo/client';
-import { useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { GET_RESTAURANT_DETAILS } from '../graphql/getRestaurantDetails';
 
 export default function RestaurantId() {
@@ -27,78 +27,88 @@ export default function RestaurantId() {
   const r = data.restaurant;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>{r.name}</Text>
+    <>
+      <Stack.Screen
+        name="restaurantId"
+        options={{
+          title: '🏠 Vos restaurants',
+          headerStyle: { backgroundColor: '#f4f4f4' },
+        }}
+      />
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>{r.name}</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>📄 Description</Text>
-        <Text style={styles.text}>{r.description}</Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>📍 Localisation</Text>
-        <Text style={styles.text}>Adresse : {r.address}</Text>
-        <Text style={styles.text}>
-          Ville : {r.city.name} ({r.city.postalCode})
-        </Text>
-        <Text style={styles.text}>
-          Terrasse : {r.terrace ? '✅ Oui' : '❌ Non'}
-        </Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>📞 Informations pratiques</Text>
-        {r.phone && <Text style={styles.text}>Téléphone : {r.phone}</Text>}
-        {r.openingHours && (
-          <Text style={styles.text}>Horaires : {r.openingHours}</Text>
-        )}
-        {r.cuisine && <Text style={styles.text}>Cuisine : {r.cuisine}</Text>}
-        {r.website && (
-          <View style={{ marginTop: 10 }}>
-            <Button
-              title="🌐 Site web"
-              onPress={() => Linking.openURL(r.website)}
-            />
-          </View>
-        )}
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>👤 Gérant</Text>
-        {r.manager ? (
-          <>
-            <Text style={styles.text}>
-              {r.manager.firstname} {r.manager.lastname}
-            </Text>
-            <Text style={styles.text}>Email : {r.manager.email}</Text>
-          </>
-        ) : (
-          <Text style={styles.text}>Non renseigné</Text>
-        )}
-      </View>
-
-      {r.ratings && r.ratings.length > 0 && (
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>⭐ Avis clients</Text>
-          {r.ratings.map((rating: any) => (
-            <Text key={rating.id} style={styles.text}>
-              Note : {rating.value} / 5
-            </Text>
-          ))}
+          <Text style={styles.sectionTitle}>📄 Description</Text>
+          <Text style={styles.text}>{r.description}</Text>
         </View>
-      )}
 
-      {r.cookingStyles && r.cookingStyles.length > 0 && (
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>🍳 Styles de cuisine</Text>
-          {r.cookingStyles.map((style: any) => (
-            <Text key={style.id} style={styles.text}>
-              • {style.label}
-            </Text>
-          ))}
+          <Text style={styles.sectionTitle}>📍 Localisation</Text>
+          <Text style={styles.text}>Adresse : {r.address}</Text>
+          <Text style={styles.text}>
+            Ville : {r.city.name} ({r.city.postalCode})
+          </Text>
+          <Text style={styles.text}>
+            Terrasse : {r.terrace ? '✅ Oui' : '❌ Non'}
+          </Text>
         </View>
-      )}
-    </ScrollView>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>📞 Informations pratiques</Text>
+          {r.phone && <Text style={styles.text}>Téléphone : {r.phone}</Text>}
+          {r.openingHours && (
+            <Text style={styles.text}>Horaires : {r.openingHours}</Text>
+          )}
+          {r.cuisine && <Text style={styles.text}>Cuisine : {r.cuisine}</Text>}
+          {r.website && (
+            <View style={{ marginTop: 10 }}>
+              <Button
+                title="🌐 Site web"
+                onPress={() => Linking.openURL(r.website)}
+              />
+            </View>
+          )}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>👤 Gérant</Text>
+          {r.manager ? (
+            <>
+              <Text style={styles.text}>
+                {r.manager.firstname} {r.manager.lastname}
+              </Text>
+              <Text style={styles.text}>Email : {r.manager.email}</Text>
+            </>
+          ) : (
+            <Text style={styles.text}>Non renseigné</Text>
+          )}
+        </View>
+        <View style={styles.card}>
+          {r.ratings && r.ratings.length > 0 && (
+            <View style={styles.card}>
+              <Text style={styles.sectionTitle}>⭐ Avis clients</Text>
+              {r.ratings.map((rating: { id: string; value: number }) => (
+                <Text key={rating.id} style={styles.text}>
+                  Note : {rating.value} / 5
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {r.cookingStyles && r.cookingStyles.length > 0 && (
+            <View style={styles.card}>
+              <Text style={styles.sectionTitle}>🍳 Styles de cuisine</Text>
+              {r.cookingStyles.map((style: { id: string; label: string }) => (
+                <Text key={style.id} style={styles.text}>
+                  • {style.label}
+                </Text>
+              ))}
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </>
   );
 }
 
